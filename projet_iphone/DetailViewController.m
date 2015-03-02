@@ -28,11 +28,15 @@
 }
 
 - (void)configureView {
+    [[self addTaskButton] setHidden:YES];
     // Update the user interface for the detail item.
     if (self.detailItem) {
         self.detailDescriptionLabel.text = [[self.detailItem valueForKey:@"title"] description];
         self.projectTitle.text = [[self.detailItem valueForKey:@"title"] description];
         self.projectDescription.text = [[self.detailItem valueForKey:@"describe"] description];
+        
+        [[self addTaskButton] setHidden:NO];
+        
         tasks = [[self.detailItem valueForKey:@"tasks"] allObjects];
     }
 }
@@ -43,10 +47,10 @@
     // Do any additional setup after loading the view, typically from a nib.
     [self configureView];
     
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    //self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
+    //UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+    //self.navigationItem.rightBarButtonItem = addButton;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,7 +84,6 @@
 }
 
 - (IBAction)saveButton:(id)sender {
-    NSLog(@"dsfds");
     NSManagedObjectContext *context = [self managedObjectContext];
     NSManagedObject *project = [NSEntityDescription
                                        insertNewObjectForEntityForName:@"Project"
@@ -103,6 +106,14 @@
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     }
 
+}
+
+- (IBAction)addTask:(id)sender {
+    TaskViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"TaskViewController"];
+    [controller.navigationItem setTitle:@"Créer une tâche"];
+    [controller setProject:self.detailItem];
+    [controller setManagedObjectContext:[self managedObjectContext]];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)configureCell:(UITableViewCell *)cell withTaskObject:(Task *)task {

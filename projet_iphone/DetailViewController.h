@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *projectDescription;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 - (IBAction)saveButton:(id)sender;
+- (IBAction)addTask:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *addTaskButton;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;

@@ -27,6 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    self.editButtonItem.title = @"Supprimer";
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
@@ -50,7 +51,7 @@
     [[self navigationController] pushViewController:detailView animated:YES];
     
     
-    /*NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
     NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
     NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
         
@@ -59,7 +60,7 @@
     //[newManagedObject setValue:[NSDate date] forKey:@"timeStamp"];
         
     // Save the context.
-    /*NSError *error = nil;
+    NSError *error = nil;
     if (![context save:&error]) {
         // Replace this implementation with code to handle the error appropriately.
         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -87,6 +88,7 @@
         NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         DetailViewController *controller = (DetailViewController *)[segue destinationViewController];
         [controller setDetailItem:object];
+        [controller setManagedObjectContext:[self managedObjectContext]];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
     }

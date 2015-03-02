@@ -13,6 +13,7 @@
 @end
 
 @implementation TaskViewController
+@synthesize managedObjectContext;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,10 +38,35 @@
 - (void)configureView {
     // Update the user interface for the detail item.
     if (self.detailItem) {
-        NSLog(@"ll");
         self.taskTitle.text = [[self.detailItem valueForKey:@"title"] description];
-        //self.projectTitle.text = [[self.detailItem valueForKey:@"title"] description];
         self.TaskDescription.text = [[self.detailItem valueForKey:@"describe"] description];
+        project = [self.detailItem valueForKey:@"project_id"];
+    }
+}
+
+- (void) setProject:(Project*)newProject {
+    project = newProject;
+}
+
+- (IBAction)saveTask:(id)sender {
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSManagedObject *task = [NSEntityDescription
+                                          insertNewObjectForEntityForName:@"Task"
+                                          inManagedObjectContext:context];
+    [task setValue:[NSDate date] forKey:@"date_start"];
+    [task setValue:[NSDate date] forKey:@"date_end"];
+    [task setValue:[[self taskTitle] text] forKey:@"title"];
+    [task setValue:[[self TaskDescription] text] forKey:@"describe"];
+    [task setValue:project forKey:@"project_id"];
+    
+    NSSet* tasks = [[NSSet alloc] initWithSet:[project tasks]];
+    tasks = [tasks setByAddingObject:task];
+    
+    [project setValue:[NSSet setWithSet:tasks] forKey:@"tasks"];
+    
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     }
 }
 

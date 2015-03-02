@@ -31,15 +31,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFL-ID-hEC">
-                                <rect key="frame" x="130" y="80" width="60" height="30"/>
-                                <state key="normal" title="&lt; Retour">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="7bK-jq-Zjz" kind="show" id="fVH-je-Gs0"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dKB-iN-F04">
                                 <rect key="frame" x="16" y="80" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -80,7 +71,7 @@
                                 </connections>
                             </tableView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MEh-we-GFQ">
-                                <rect key="frame" x="16" y="118" width="568" height="146"/>
+                                <rect key="frame" x="16" y="118" width="568" height="132"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -95,10 +86,20 @@
                                     <action selector="saveButton:" destination="gge-Od-dDM" eventType="touchUpInside" id="1qd-cL-dmB"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kz4-CP-q8j">
+                                <rect key="frame" x="16" y="248" width="92" height="30"/>
+                                <state key="normal" title="Ajouter tâche">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addTask:" destination="gge-Od-dDM" eventType="touchUpInside" id="KyL-OM-WkJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="addTaskButton" destination="Kz4-CP-q8j" id="yJL-hs-4G3"/>
                         <outlet property="projectDescription" destination="MEh-we-GFQ" id="5Yo-cE-myj"/>
                         <outlet property="projectTitle" destination="dKB-iN-F04" id="7ji-3j-u94"/>
                         <outlet property="tableView" destination="rIH-0L-P9R" id="9Am-0d-3A3"/>
@@ -173,7 +174,7 @@
         <!--Task View Controller-->
         <scene sceneID="eE5-pb-bGB">
             <objects>
-                <viewController id="0TL-aw-eQY" customClass="TaskViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TaskViewController" id="0TL-aw-eQY" customClass="TaskViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zb0-YV-Jbc"/>
                         <viewControllerLayoutGuide type="bottom" id="1nr-2s-MDM"/>
@@ -182,12 +183,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VaE-aa-IuK">
-                                <rect key="frame" x="16" y="91" width="46" height="30"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aKK-8d-0Og">
                                 <rect key="frame" x="16" y="139" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -200,6 +195,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPR-yd-Gji">
+                                <rect key="frame" x="91" y="91" width="47" height="30"/>
+                                <state key="normal" title="Valider">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveTask:" destination="0TL-aw-eQY" eventType="touchUpInside" id="79Y-Hs-YrT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -214,7 +218,4 @@
             <point key="canvasLocation" x="693" y="95"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="fVH-je-Gs0"/>
-    </inferredMetricsTieBreakers>
 </document>
