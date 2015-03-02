@@ -40,7 +40,17 @@
 }
 
 - (void)insertNewObject:(id)sender {
-    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+    //DetailViewController *controller = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+    DetailViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
+    [controller.navigationItem setTitle:@"Créer un projet"];
+    [controller setManagedObjectContext:[self managedObjectContext]];
+    [self.navigationController pushViewController:controller animated:YES];
+    
+    /*DetailViewController* detailView = [[DetailViewController alloc] initWithNibName:nil bundle:nil];
+    [[self navigationController] pushViewController:detailView animated:YES];
+    
+    
+    /*NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
     NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
     NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
         
@@ -49,13 +59,15 @@
     //[newManagedObject setValue:[NSDate date] forKey:@"timeStamp"];
         
     // Save the context.
-    NSError *error = nil;
+    /*NSError *error = nil;
     if (![context save:&error]) {
         // Replace this implementation with code to handle the error appropriately.
         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
-    }
+    }*/
+    
+    
 }
 
 #pragma mark - Segues

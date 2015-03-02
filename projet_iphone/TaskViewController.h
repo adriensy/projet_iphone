@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TaskViewController : UIViewController
+@interface TaskViewController : UIViewController {
+    int projectId;
+}
 
 @property (strong, nonatomic) id detailItem;
 @property (weak, nonatomic) IBOutlet UITextField *taskTitle;

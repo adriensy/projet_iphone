@@ -79,6 +79,32 @@
     return cell;
 }
 
+- (IBAction)saveButton:(id)sender {
+    NSLog(@"dsfds");
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSManagedObject *project = [NSEntityDescription
+                                       insertNewObjectForEntityForName:@"Project"
+                                       inManagedObjectContext:context];
+    [project setValue:[[self projectTitle] text] forKey:@"title"];
+    [project setValue:[[self projectDescription] text] forKey:@"describe"];
+    /*[project setValue:[NSNumber numberWithInt:1] forKey:@"id"];
+    NSManagedObject *failedBankDetails = [NSEntityDescription
+                                          insertNewObjectForEntityForName:@"Task"
+                                          inManagedObjectContext:context];
+    [failedBankDetails setValue:[NSDate date] forKey:@"date_start"];
+    [failedBankDetails setValue:[NSDate date] forKey:@"date_end"];
+    [failedBankDetails setValue:[NSNumber numberWithInt:1] forKey:@"id"];
+    [failedBankDetails setValue:@"details" forKey:@"title"];
+    [failedBankDetails setValue:@"details" forKey:@"describe"];
+    [failedBankDetails setValue:failedBankInfo forKey:@"project_id"];
+    [project setValue:[NSSet setWithObject:failedBankDetails] forKey:@"tasks"];*/
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+
+}
+
 - (void)configureCell:(UITableViewCell *)cell withTaskObject:(Task *)task {
     cell.textLabel.text = [[task valueForKey:@"title"] description];
     
@@ -105,5 +131,4 @@
         controller.navigationItem.leftItemsSupplementBackButton = YES;
     }
 }
-
 @end

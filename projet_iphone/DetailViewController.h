@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *projectTitle;
 @property (weak, nonatomic) IBOutlet UITextView *projectDescription;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+- (IBAction)saveButton:(id)sender;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
