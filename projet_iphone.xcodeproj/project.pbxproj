@@ -7,15 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		709475EF1A9FEA1000357AC9 /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 709475EE1A9FEA1000357AC9 /* TaskViewController.m */; };
+		70D8819D1AA0E775007EE198 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70D8819B1AA0E775007EE198 /* Main.storyboard */; };
 		70F1BF561A9A2AEE00EA0946 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F1BF551A9A2AEE00EA0946 /* main.m */; };
 		70F1BF591A9A2AEE00EA0946 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F1BF581A9A2AEE00EA0946 /* AppDelegate.m */; };
 		70F1BF5C1A9A2AEE00EA0946 /* projet_iphone.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 70F1BF5A1A9A2AEE00EA0946 /* projet_iphone.xcdatamodeld */; };
 		70F1BF5F1A9A2AEE00EA0946 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F1BF5E1A9A2AEE00EA0946 /* MasterViewController.m */; };
 		70F1BF621A9A2AEE00EA0946 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F1BF611A9A2AEE00EA0946 /* DetailViewController.m */; };
-		70F1BF651A9A2AEE00EA0946 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70F1BF631A9A2AEE00EA0946 /* Main.storyboard */; };
 		70F1BF671A9A2AEE00EA0946 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70F1BF661A9A2AEE00EA0946 /* Images.xcassets */; };
 		70F1BF6A1A9A2AEE00EA0946 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70F1BF681A9A2AEE00EA0946 /* LaunchScreen.xib */; };
 		70F1BF761A9A2AEE00EA0946 /* projet_iphoneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F1BF751A9A2AEE00EA0946 /* projet_iphoneTests.m */; };
+		70F1BF811A9A529E00EA0946 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F1BF801A9A529E00EA0946 /* Task.m */; };
+		70F1BF841A9A529F00EA0946 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F1BF831A9A529F00EA0946 /* Project.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +32,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		709475ED1A9FEA1000357AC9 /* TaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskViewController.h; sourceTree = "<group>"; };
+		709475EE1A9FEA1000357AC9 /* TaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskViewController.m; sourceTree = "<group>"; };
+		70D8819C1AA0E775007EE198 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		70F1BF501A9A2AEE00EA0946 /* projet_iphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = projet_iphone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70F1BF541A9A2AEE00EA0946 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70F1BF551A9A2AEE00EA0946 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -39,12 +45,15 @@
 		70F1BF5E1A9A2AEE00EA0946 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		70F1BF601A9A2AEE00EA0946 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		70F1BF611A9A2AEE00EA0946 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
-		70F1BF641A9A2AEE00EA0946 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		70F1BF661A9A2AEE00EA0946 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		70F1BF691A9A2AEE00EA0946 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		70F1BF6F1A9A2AEE00EA0946 /* projet_iphoneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = projet_iphoneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		70F1BF741A9A2AEE00EA0946 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70F1BF751A9A2AEE00EA0946 /* projet_iphoneTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = projet_iphoneTests.m; sourceTree = "<group>"; };
+		70F1BF7F1A9A529E00EA0946 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
+		70F1BF801A9A529E00EA0946 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
+		70F1BF821A9A529F00EA0946 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
+		70F1BF831A9A529F00EA0946 /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,17 +95,23 @@
 		70F1BF521A9A2AEE00EA0946 /* projet_iphone */ = {
 			isa = PBXGroup;
 			children = (
-				70F1BF571A9A2AEE00EA0946 /* AppDelegate.h */,
 				70F1BF581A9A2AEE00EA0946 /* AppDelegate.m */,
+				70F1BF571A9A2AEE00EA0946 /* AppDelegate.h */,
 				70F1BF5D1A9A2AEE00EA0946 /* MasterViewController.h */,
 				70F1BF5E1A9A2AEE00EA0946 /* MasterViewController.m */,
 				70F1BF601A9A2AEE00EA0946 /* DetailViewController.h */,
 				70F1BF611A9A2AEE00EA0946 /* DetailViewController.m */,
-				70F1BF631A9A2AEE00EA0946 /* Main.storyboard */,
 				70F1BF661A9A2AEE00EA0946 /* Images.xcassets */,
 				70F1BF681A9A2AEE00EA0946 /* LaunchScreen.xib */,
+				70D8819B1AA0E775007EE198 /* Main.storyboard */,
 				70F1BF5A1A9A2AEE00EA0946 /* projet_iphone.xcdatamodeld */,
+				70F1BF821A9A529F00EA0946 /* Project.h */,
+				70F1BF831A9A529F00EA0946 /* Project.m */,
+				70F1BF7F1A9A529E00EA0946 /* Task.h */,
+				70F1BF801A9A529E00EA0946 /* Task.m */,
 				70F1BF531A9A2AEE00EA0946 /* Supporting Files */,
+				709475ED1A9FEA1000357AC9 /* TaskViewController.h */,
+				709475EE1A9FEA1000357AC9 /* TaskViewController.m */,
 			);
 			path = projet_iphone;
 			sourceTree = "<group>";
@@ -207,7 +222,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				70F1BF651A9A2AEE00EA0946 /* Main.storyboard in Resources */,
+				70D8819D1AA0E775007EE198 /* Main.storyboard in Resources */,
 				70F1BF6A1A9A2AEE00EA0946 /* LaunchScreen.xib in Resources */,
 				70F1BF671A9A2AEE00EA0946 /* Images.xcassets in Resources */,
 			);
@@ -228,9 +243,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				70F1BF621A9A2AEE00EA0946 /* DetailViewController.m in Sources */,
+				709475EF1A9FEA1000357AC9 /* TaskViewController.m in Sources */,
 				70F1BF5F1A9A2AEE00EA0946 /* MasterViewController.m in Sources */,
 				70F1BF5C1A9A2AEE00EA0946 /* projet_iphone.xcdatamodeld in Sources */,
 				70F1BF591A9A2AEE00EA0946 /* AppDelegate.m in Sources */,
+				70F1BF811A9A529E00EA0946 /* Task.m in Sources */,
+				70F1BF841A9A529F00EA0946 /* Project.m in Sources */,
 				70F1BF561A9A2AEE00EA0946 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,10 +272,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		70F1BF631A9A2AEE00EA0946 /* Main.storyboard */ = {
+		70D8819B1AA0E775007EE198 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				70F1BF641A9A2AEE00EA0946 /* Base */,
+				70D8819C1AA0E775007EE198 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -424,6 +442,7 @@
 				70F1BF7B1A9A2AEE00EA0946 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		70F1BF7C1A9A2AEE00EA0946 /* Build configuration list for PBXNativeTarget "projet_iphoneTests" */ = {
 			isa = XCConfigurationList;
@@ -432,6 +451,7 @@
 				70F1BF7E1A9A2AEE00EA0946 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

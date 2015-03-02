@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "DetailViewController.h"
 #import "MasterViewController.h"
+#import "Project.h"
+#import "Task.h"
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
 
@@ -18,6 +20,28 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSManagedObject *failedBankInfo = [NSEntityDescription
+                                       insertNewObjectForEntityForName:@"Project"
+                                       inManagedObjectContext:context];
+    [failedBankInfo setValue:@"Test Bank" forKey:@"title"];
+    [failedBankInfo setValue:@"Testville" forKey:@"describe"];
+    [failedBankInfo setValue:[NSNumber numberWithInt:1] forKey:@"id"];
+    NSManagedObject *failedBankDetails = [NSEntityDescription
+                                          insertNewObjectForEntityForName:@"Task"
+                                          inManagedObjectContext:context];
+    [failedBankDetails setValue:[NSDate date] forKey:@"date_start"];
+    [failedBankDetails setValue:[NSDate date] forKey:@"date_end"];
+    [failedBankDetails setValue:[NSNumber numberWithInt:1] forKey:@"id"];
+    [failedBankDetails setValue:@"details" forKey:@"title"];
+    [failedBankDetails setValue:@"details" forKey:@"describe"];
+    [failedBankDetails setValue:failedBankInfo forKey:@"project_id"];
+    [failedBankInfo setValue:[NSSet setWithObject:failedBankDetails] forKey:@"tasks"];
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+    
     // Override point for customization after application launch.
     UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
     UINavigationController *navigationController = [splitViewController.viewControllers lastObject];

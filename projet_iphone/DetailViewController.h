@@ -7,11 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
-@interface DetailViewController : UIViewController
+@interface DetailViewController : UIViewController <NSFetchedResultsControllerDelegate> {
+    NSArray * tasks;
+}
 
 @property (strong, nonatomic) id detailItem;
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UITextField *projectTitle;
+@property (weak, nonatomic) IBOutlet UITextView *projectDescription;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end
 
