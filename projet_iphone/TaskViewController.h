@@ -11,6 +11,7 @@
 
 @interface TaskViewController : UIViewController {
     Project* project;
+    BOOL isNew;
 }
 
 @property (strong, nonatomic) id detailItem;
@@ -22,5 +23,6 @@
 
 - (void) setProject:(Project*)newProject;
 - (IBAction)saveTask:(id)sender;
+- (void) setIsNew:(int)newIsNew;
 
 @end

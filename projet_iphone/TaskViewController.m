@@ -35,6 +35,10 @@
     }
 }
 
+- (void) setIsNew:(int)newIsNew {
+    isNew = newIsNew;
+}
+
 - (void)configureView {
     // Update the user interface for the detail item.
     if (self.detailItem) {
@@ -50,9 +54,17 @@
 
 - (IBAction)saveTask:(id)sender {
     NSManagedObjectContext *context = [self managedObjectContext];
-    NSManagedObject *task = [NSEntityDescription
-                                          insertNewObjectForEntityForName:@"Task"
-                                          inManagedObjectContext:context];
+    NSManagedObject *task = nil;
+    
+    if (isNew) {
+    task = [NSEntityDescription
+            insertNewObjectForEntityForName:@"Task"
+            inManagedObjectContext:context];
+
+    } else {
+        task = self.detailItem;
+    }
+    
     [task setValue:[NSDate date] forKey:@"date_start"];
     [task setValue:[NSDate date] forKey:@"date_end"];
     [task setValue:[[self taskTitle] text] forKey:@"title"];

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "projet_iphone/MasterViewController.m"
-            timestampString = "446993124.073621"
+            timestampString = "446995232.566824"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
             landmarkName = "-insertNewObject:"
             landmarkType = "5">
          </BreakpointContent>

@@ -45,6 +45,7 @@
     DetailViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
     [controller.navigationItem setTitle:@"Créer un projet"];
     [controller setManagedObjectContext:[self managedObjectContext]];
+    [controller setIsNew:YES];
     [self.navigationController pushViewController:controller animated:YES];
     
     /*DetailViewController* detailView = [[DetailViewController alloc] initWithNibName:nil bundle:nil];
@@ -89,6 +90,7 @@
         DetailViewController *controller = (DetailViewController *)[segue destinationViewController];
         [controller setDetailItem:object];
         [controller setManagedObjectContext:[self managedObjectContext]];
+        [controller setIsNew:NO];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
     }

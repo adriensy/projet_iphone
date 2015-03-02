@@ -73,6 +73,10 @@
     return [tasks objectAtIndex:index] ;
 }
 
+- (void) setIsNew:(int)newIsNew {
+    isNew = newIsNew;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyIdentifier" forIndexPath:indexPath];
@@ -85,22 +89,19 @@
 
 - (IBAction)saveButton:(id)sender {
     NSManagedObjectContext *context = [self managedObjectContext];
-    NSManagedObject *project = [NSEntityDescription
-                                       insertNewObjectForEntityForName:@"Project"
-                                       inManagedObjectContext:context];
+    NSManagedObject *project = nil;
+    
+    if (isNew) {
+        project = [NSEntityDescription
+                                    insertNewObjectForEntityForName:@"Project"
+                                    inManagedObjectContext:context];
+    } else {
+        project = self.detailItem;
+    }
+    
     [project setValue:[[self projectTitle] text] forKey:@"title"];
     [project setValue:[[self projectDescription] text] forKey:@"describe"];
-    /*[project setValue:[NSNumber numberWithInt:1] forKey:@"id"];
-    NSManagedObject *failedBankDetails = [NSEntityDescription
-                                          insertNewObjectForEntityForName:@"Task"
-                                          inManagedObjectContext:context];
-    [failedBankDetails setValue:[NSDate date] forKey:@"date_start"];
-    [failedBankDetails setValue:[NSDate date] forKey:@"date_end"];
-    [failedBankDetails setValue:[NSNumber numberWithInt:1] forKey:@"id"];
-    [failedBankDetails setValue:@"details" forKey:@"title"];
-    [failedBankDetails setValue:@"details" forKey:@"describe"];
-    [failedBankDetails setValue:failedBankInfo forKey:@"project_id"];
-    [project setValue:[NSSet setWithObject:failedBankDetails] forKey:@"tasks"];*/
+    
     NSError *error;
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
@@ -112,6 +113,7 @@
     TaskViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"TaskViewController"];
     [controller.navigationItem setTitle:@"Créer une tâche"];
     [controller setProject:self.detailItem];
+    [controller setIsNew:YES];
     [controller setManagedObjectContext:[self managedObjectContext]];
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -138,6 +140,7 @@
         NSManagedObject *object = [tasks objectAtIndex:indexPath.row];
         TaskViewController *controller = (TaskViewController *)[segue destinationViewController];
         [controller setDetailItem:object];
+        [controller setIsNew:NO];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
     }
