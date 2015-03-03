@@ -14,11 +14,10 @@
 
 @implementation TaskViewController
 @synthesize managedObjectContext;
+@synthesize pickerView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self configureView];
-    
     
     _TaskDescription.layer.borderWidth = 0.5f;
     _TaskDescription.layer.borderColor = [[UIColor grayColor] CGColor];
@@ -26,8 +25,13 @@
     
     NSLocale *frLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"fr_FR"];
     
+    [[self pickerView] setHidden:YES];
+    [[self pickerViewEnd] setHidden:YES];
+    
     [[self dateStart] setLocale: frLocale];
     [[self dateEnd] setLocale: frLocale];
+    
+    [self configureView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,6 +78,14 @@
         self.TaskDescription.text = [[self.detailItem valueForKey:@"describe"] description];
         [[self dateStart] setDate: [self.detailItem valueForKey:@"date_start"]];
         [[self dateEnd] setDate: [self.detailItem valueForKey:@"date_end"]];
+        
+        NSDate *dateSelectedFin = [self.dateEnd date];
+        NSDate *dateSelectedDebut = [self.dateStart date];
+        NSString *dateFinStamp = [[NSString alloc]initWithFormat:@"%@", dateSelectedFin];
+        NSString *dateDebutStamp = [[NSString alloc]initWithFormat:@"%@", dateSelectedDebut];
+        self.dateEndButton.titleLabel.text = dateFinStamp;
+        self.dateStartButton.titleLabel.text = dateDebutStamp;
+        
         project = [self.detailItem valueForKey:@"project_id"];
     }
 }
@@ -125,5 +137,65 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)showDatePickerStart:(id)sender {
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    [[self pickerView] setHidden:NO];
+    [UIView commitAnimations];
+    
+    [[self view] setBackgroundColor:[UIColor lightGrayColor]];
+}
+
+- (IBAction)hideDatePickerStart:(id)sender {
+    NSDate *dateSelectedDebut = [self.dateStart date];
+    NSString *dateDebutStamp = [[NSString alloc]initWithFormat:@"%@", dateSelectedDebut];
+    self.dateStartButton.titleLabel.text = dateDebutStamp;
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    [[self pickerView] setHidden:YES];
+    [UIView commitAnimations];
+    
+    [[self view] setBackgroundColor:[UIColor whiteColor]];
+}
+
+- (IBAction)showDatePickerEnd:(id)sender {
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    [[self pickerViewEnd] setHidden:NO];
+    [UIView commitAnimations];
+    
+    [[self view] setBackgroundColor:[UIColor lightGrayColor]];
+}
+
+- (IBAction)hideDatePickerEnd:(id)sender {
+    NSDate *dateSelectedFin = [self.dateEnd date];
+    NSString *dateFinStamp = [[NSString alloc]initWithFormat:@"%@", dateSelectedFin];
+    self.dateEndButton.titleLabel.text = dateFinStamp;
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    [[self pickerViewEnd] setHidden:YES];
+    [UIView commitAnimations];
+    
+    [[self view] setBackgroundColor:[UIColor whiteColor]];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @end

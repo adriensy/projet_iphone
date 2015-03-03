@@ -139,9 +139,14 @@
 }
 
 - (void)configureCell:(UITableViewCell *)cell withTaskObject:(Task *)task {
-    cell.textLabel.text = [[task valueForKey:@"title"] description];
+    BOOL isChecked = [task valueForKey:@"checked"];
     
+    cell.textLabel.text = [[task valueForKey:@"title"] description];
     cell.detailTextLabel.text = [task valueForKey:@"title"];
+    
+    if (isChecked) {
+        [cell setBackgroundColor: [UIColor greenColor]];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

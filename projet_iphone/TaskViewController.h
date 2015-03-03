@@ -18,6 +18,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *taskTitle;
 @property (weak, nonatomic) IBOutlet UITextView *TaskDescription;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *pickerView;
+@property (weak, nonatomic) IBOutlet UIView *pickerViewEnd;
+@property (weak, nonatomic) IBOutlet UIButton *dateStartButton;
+@property (weak, nonatomic) IBOutlet UIButton *dateEndButton;
+
 
 @property (weak, nonatomic) IBOutlet UIDatePicker *dateStart;
 @property (weak, nonatomic) IBOutlet UIDatePicker *dateEnd;
@@ -26,5 +31,7 @@
 - (void) setProject:(Project*)newProject;
 - (IBAction)saveTask:(id)sender;
 - (void) setIsNew:(int)newIsNew;
+- (IBAction)showDatePickerStart:(id)sender;
+- (IBAction)hideDatePickerEnd:(id)sender;
 
 @end

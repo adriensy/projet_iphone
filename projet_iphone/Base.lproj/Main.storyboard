@@ -204,25 +204,77 @@
                                     <action selector="saveTask:" destination="0TL-aw-eQY" eventType="touchUpInside" id="79Y-Hs-YrT"/>
                                 </connections>
                             </button>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="m6j-yU-i4P">
-                                <rect key="frame" x="16" y="246" width="386" height="162"/>
-                                <date key="date" timeIntervalSinceReferenceDate="447073275.39375001">
-                                    <!--2015-03-03 11:01:15 +0000-->
-                                </date>
-                            </datePicker>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="URi-st-vDT">
-                                <rect key="frame" x="136" y="76" width="298" height="162"/>
-                                <date key="date" timeIntervalSinceReferenceDate="447073275.39375001">
-                                    <!--2015-03-03 11:01:15 +0000-->
-                                </date>
-                            </datePicker>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wbf-hm-51M">
+                                <rect key="frame" x="198" y="91" width="309" height="202"/>
+                                <subviews>
+                                    <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="m6j-yU-i4P">
+                                        <rect key="frame" x="0.0" y="0.0" width="292" height="162"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="447073275.39375001">
+                                            <!--2015-03-03 11:01:15 +0000-->
+                                        </date>
+                                    </datePicker>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="no9-YJ-7Zn">
+                                        <rect key="frame" x="40" y="159" width="37" height="30"/>
+                                        <state key="normal" title="Done">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="hideDatePickerStart:" destination="0TL-aw-eQY" eventType="touchUpInside" id="fBj-Kx-eB2"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.18620178179999999" blue="0.30259483450000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIZ-Yg-me7">
+                                <rect key="frame" x="24" y="228" width="385" height="30"/>
+                                <state key="normal" title="Date de début">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showDatePickerStart:" destination="0TL-aw-eQY" eventType="touchUpInside" id="wTp-iJ-f34"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6ea-EG-mqs">
+                                <rect key="frame" x="134" y="329" width="315" height="226"/>
+                                <subviews>
+                                    <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="URi-st-vDT">
+                                        <rect key="frame" x="0.0" y="8" width="298" height="162"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="447073275.39375001">
+                                            <!--2015-03-03 11:01:15 +0000-->
+                                        </date>
+                                    </datePicker>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pih-W5-6Hr">
+                                        <rect key="frame" x="30" y="178" width="35" height="30"/>
+                                        <state key="normal" title="done">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="hideDatePickerEnd:" destination="0TL-aw-eQY" eventType="touchUpInside" id="8Zc-IQ-jMH"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.4724846955" green="0.68794631699999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sif-qc-2jX">
+                                <rect key="frame" x="24" y="285" width="440" height="30"/>
+                                <state key="normal" title="Date de fin">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showDatePickerEnd:" destination="0TL-aw-eQY" eventType="touchUpInside" id="zeY-AY-VP2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="TaskDescription" destination="8ey-Us-GVB" id="H6i-k4-g9F"/>
                         <outlet property="dateEnd" destination="URi-st-vDT" id="4mc-c9-3xS"/>
+                        <outlet property="dateEndButton" destination="Sif-qc-2jX" id="9lZ-CP-Xb8"/>
                         <outlet property="dateStart" destination="m6j-yU-i4P" id="Hrk-R1-KzB"/>
+                        <outlet property="dateStartButton" destination="NIZ-Yg-me7" id="jKr-U1-FF1"/>
+                        <outlet property="pickerView" destination="Wbf-hm-51M" id="9OY-ps-uG2"/>
+                        <outlet property="pickerViewEnd" destination="6ea-EG-mqs" id="Uah-BM-Od5"/>
                         <outlet property="taskTitle" destination="aKK-8d-0Og" id="mWi-7B-TRD"/>
                         <outlet property="view" destination="LZQ-GT-iU2" id="dCb-vf-oJy"/>
                     </connections>
