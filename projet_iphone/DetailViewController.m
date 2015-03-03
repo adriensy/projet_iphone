@@ -27,9 +27,16 @@
     }
 }
 
-- (void)configureView {
+- (void)configureView {			
     [[self addTaskButton] setHidden:YES];
-    // Update the user interface for the detail item.
+    
+    _projectDescription.layer.borderWidth = 0.5f;
+    _projectDescription.layer.borderColor = [[UIColor grayColor] CGColor];
+    _projectDescription.layer.cornerRadius = 5.0f;
+    
+    self.projectTitle.delegate = self;
+    self.projectDescription.delegate = self;
+    
     if (self.detailItem) {
         self.detailDescriptionLabel.text = [[self.detailItem valueForKey:@"title"] description];
         self.projectTitle.text = [[self.detailItem valueForKey:@"title"] description];
@@ -41,10 +48,24 @@
     }
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    if([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    
+    return YES;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
     [self configureView];
     
     //self.navigationItem.leftBarButtonItem = self.editButtonItem;
@@ -55,7 +76,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -124,6 +144,11 @@
     cell.detailTextLabel.text = [task valueForKey:@"title"];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    tasks = [[self.detailItem valueForKey:@"tasks"] allObjects];
+    [self.tableView reloadData];
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {

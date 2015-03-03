@@ -189,14 +189,14 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8ey-Us-GVB">
-                                <rect key="frame" x="16" y="188" width="397" height="328"/>
+                                <rect key="frame" x="24" y="412" width="397" height="272"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPR-yd-Gji">
-                                <rect key="frame" x="91" y="91" width="47" height="30"/>
+                                <rect key="frame" x="45" y="96" width="47" height="30"/>
                                 <state key="normal" title="Valider">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -204,18 +204,32 @@
                                     <action selector="saveTask:" destination="0TL-aw-eQY" eventType="touchUpInside" id="79Y-Hs-YrT"/>
                                 </connections>
                             </button>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="m6j-yU-i4P">
+                                <rect key="frame" x="16" y="246" width="386" height="162"/>
+                                <date key="date" timeIntervalSinceReferenceDate="447073275.39375001">
+                                    <!--2015-03-03 11:01:15 +0000-->
+                                </date>
+                            </datePicker>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="URi-st-vDT">
+                                <rect key="frame" x="136" y="76" width="298" height="162"/>
+                                <date key="date" timeIntervalSinceReferenceDate="447073275.39375001">
+                                    <!--2015-03-03 11:01:15 +0000-->
+                                </date>
+                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="TaskDescription" destination="8ey-Us-GVB" id="H6i-k4-g9F"/>
+                        <outlet property="dateEnd" destination="URi-st-vDT" id="4mc-c9-3xS"/>
+                        <outlet property="dateStart" destination="m6j-yU-i4P" id="Hrk-R1-KzB"/>
                         <outlet property="taskTitle" destination="aKK-8d-0Og" id="mWi-7B-TRD"/>
                         <outlet property="view" destination="LZQ-GT-iU2" id="dCb-vf-oJy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Zd-0W-X7x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="693" y="95"/>
+            <point key="canvasLocation" x="693" y="121"/>
         </scene>
     </scenes>
 </document>

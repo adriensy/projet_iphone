@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "Project.h"
 
-@interface DetailViewController : UIViewController <NSFetchedResultsControllerDelegate> {
+@interface DetailViewController : UIViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, UITextViewDelegate> {
     NSArray * tasks;
     BOOL isNew;
 }

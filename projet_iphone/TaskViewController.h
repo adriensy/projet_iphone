@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Project.h"
 
-@interface TaskViewController : UIViewController {
+@interface TaskViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate> {
     Project* project;
     BOOL isNew;
 }
@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *TaskDescription;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+@property (weak, nonatomic) IBOutlet UIDatePicker *dateStart;
+@property (weak, nonatomic) IBOutlet UIDatePicker *dateEnd;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 - (void) setProject:(Project*)newProject;

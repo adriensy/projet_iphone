@@ -18,7 +18,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configureView];
-    // Do any additional setup after loading the view.
+    
+    
+    _TaskDescription.layer.borderWidth = 0.5f;
+    _TaskDescription.layer.borderColor = [[UIColor grayColor] CGColor];
+    _TaskDescription.layer.cornerRadius = 5.0f;
+    
+    NSLocale *frLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"fr_FR"];
+    
+    [[self dateStart] setLocale: frLocale];
+    [[self dateEnd] setLocale: frLocale];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,11 +48,32 @@
     isNew = newIsNew;
 }
 
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    if([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    
+    return YES;
+}
+
 - (void)configureView {
-    // Update the user interface for the detail item.
+    self.taskTitle.delegate = self;
+    self.TaskDescription.delegate = self;
+    
     if (self.detailItem) {
         self.taskTitle.text = [[self.detailItem valueForKey:@"title"] description];
         self.TaskDescription.text = [[self.detailItem valueForKey:@"describe"] description];
+        [[self dateStart] setDate: [self.detailItem valueForKey:@"date_start"]];
+        [[self dateEnd] setDate: [self.detailItem valueForKey:@"date_end"]];
         project = [self.detailItem valueForKey:@"project_id"];
     }
 }
@@ -56,6 +86,10 @@
     NSManagedObjectContext *context = [self managedObjectContext];
     NSManagedObject *task = nil;
     
+    // Gestion date
+    NSDate *dateStartPicker = [[self dateStart] date];
+    NSDate *dateEndPicker = [[self dateEnd] date];
+    
     if (isNew) {
     task = [NSEntityDescription
             insertNewObjectForEntityForName:@"Task"
@@ -65,8 +99,8 @@
         task = self.detailItem;
     }
     
-    [task setValue:[NSDate date] forKey:@"date_start"];
-    [task setValue:[NSDate date] forKey:@"date_end"];
+    [task setValue: dateStartPicker forKey:@"date_start"];
+    [task setValue: dateEndPicker forKey:@"date_end"];
     [task setValue:[[self taskTitle] text] forKey:@"title"];
     [task setValue:[[self TaskDescription] text] forKey:@"describe"];
     [task setValue:project forKey:@"project_id"];
