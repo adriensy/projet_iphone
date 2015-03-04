@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Project.h"
+#import "DetailViewController.h"
 
 @interface TaskViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate> {
     Project* project;

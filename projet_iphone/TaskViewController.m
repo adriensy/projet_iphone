@@ -27,6 +27,10 @@ static NSString* const TermineeString = @"Terminée";
     _TaskDescription.layer.borderColor = [[UIColor grayColor] CGColor];
     _TaskDescription.layer.cornerRadius = 5.0f;
     
+    // Gestion bouton retour
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"< Retour" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
+    self.navigationItem.leftBarButtonItem = backButton;
+    
     NSLocale *frLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"fr_FR"];
     
     [[self pickerView] setHidden:YES];
@@ -36,6 +40,13 @@ static NSString* const TermineeString = @"Terminée";
     [[self dateEnd] setLocale: frLocale];
     
     [self configureView];
+}
+
+- (void) backButtonPressed {
+    DetailViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
+    [controller setDetailItem:project];
+    [controller setManagedObjectContext:[self managedObjectContext]];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,7 +86,11 @@ static NSString* const TermineeString = @"Terminée";
     self.taskTitle.delegate = self;
     self.TaskDescription.delegate = self;
     
+    self.navigationItem.leftBarButtonItem.title = @"Retour";
+    
     if (self.detailItem) {
+        self.navigationItem.title = @"Modifier ma tâche";
+        
         self.taskTitle.text = [[self.detailItem valueForKey:@"title"] description];
         self.TaskDescription.text = [[self.detailItem valueForKey:@"describe"] description];
         
@@ -92,6 +107,8 @@ static NSString* const TermineeString = @"Terminée";
         NSString *dateDebutStamp = [[NSString alloc]initWithFormat:@"%@", dateSelectedDebut];
         [[self dateEndButton] setTitle:dateFinStamp forState:UIControlStateNormal];
         [[self dateStartButton] setTitle:dateDebutStamp forState:UIControlStateNormal];
+    } else {
+        self.navigationItem.title = @"Créer ma tâche";
     }
     
     [self generateTextFromCurrentState:nil];
@@ -121,7 +138,8 @@ static NSString* const TermineeString = @"Terminée";
     task = [NSEntityDescription
             insertNewObjectForEntityForName:@"Task"
             inManagedObjectContext:context];
-
+        
+        [self.navigationItem setTitle:@"Créer une tâche"];
     } else {
         task = self.detailItem;
     }
@@ -142,6 +160,11 @@ static NSString* const TermineeString = @"Terminée";
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     }
+    
+    DetailViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
+    [controller setDetailItem:project];
+    [controller setManagedObjectContext:[self managedObjectContext]];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (IBAction)showDatePickerStart:(id)sender {

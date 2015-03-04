@@ -7,8 +7,6 @@
 //
 
 #import "DetailViewController.h"
-#import "TaskViewController.h"
-#import "Task.h"
 
 @interface DetailViewController ()
 
@@ -26,8 +24,31 @@
     }
 }
 
+- (void)backButtonPressed
+{
+    // write your code to prepare popview
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 - (void)configureView {			
     [[self addTaskButton] setHidden:YES];
+    [[self tableView] setHidden:YES];
+    [[self titleTasksList] setHidden:YES];
+    
+    // Bouton valider arrondi
+    CALayer *btnLayer = [[self saveButton] layer];
+    [btnLayer setBorderWidth:0.5f];
+    [btnLayer setBorderColor:[[UIColor blueColor] CGColor]];
+    [btnLayer setMasksToBounds:YES];
+    [btnLayer setCornerRadius:5.0f];
+    [[self saveButton] setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+    
+    // Titre de la page
+    self.titleTasksList.topItem.title = @"Mes tâches";
+    
+    // Gestion bouton retour
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"< Retour" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
+    self.navigationItem.leftBarButtonItem = backButton;
     
     _projectDescription.layer.borderWidth = 0.5f;
     _projectDescription.layer.borderColor = [[UIColor grayColor] CGColor];
@@ -37,13 +58,18 @@
     self.projectDescription.delegate = self;
     
     if (self.detailItem) {
+        self.navigationItem.title = @"Modifier mon projet";
         self.detailDescriptionLabel.text = [[self.detailItem valueForKey:@"title"] description];
         self.projectTitle.text = [[self.detailItem valueForKey:@"title"] description];
         self.projectDescription.text = [[self.detailItem valueForKey:@"describe"] description];
         
         [[self addTaskButton] setHidden:NO];
+        [[self tableView] setHidden:NO];
+        [[self titleTasksList] setHidden:NO];
         
         tasks = [[self.detailItem valueForKey:@"tasks"] allObjects];
+    } else {
+        self.navigationItem.title = @"Créer mon prjet";
     }
 }
 
@@ -120,15 +146,16 @@
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     }
-
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (IBAction)addTask:(id)sender {
     TaskViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"TaskViewController"];
-    [controller.navigationItem setTitle:@"Créer une tâche"];
     [controller setProject:self.detailItem];
     [controller setIsNew:YES];
     [controller setManagedObjectContext:[self managedObjectContext]];
+    
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -155,8 +182,6 @@
         Project *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
         [controller setDetailItem:object];
-        controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
-        controller.navigationItem.leftItemsSupplementBackButton = YES;
     }
     if([[segue identifier] isEqualToString:@"TaskDetailIdentifier"])
     {
@@ -165,8 +190,6 @@
         TaskViewController *controller = (TaskViewController *)[segue destinationViewController];
         [controller setDetailItem:object];
         [controller setIsNew:NO];
-        controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
-        controller.navigationItem.leftItemsSupplementBackButton = YES;
     }
 }
 @end
