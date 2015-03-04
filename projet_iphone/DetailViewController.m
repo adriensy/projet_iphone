@@ -73,6 +73,40 @@
     }
 }
 
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setFetchBatchSize:20];
+    
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"project_id == %@", self.detailItem.id];
+    [fetchRequest setPredicate:predicate];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date_end" ascending:YES];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    aFetchedResultsController.delegate = self;
+    self.fetchedResultsController = aFetchedResultsController;
+    
+    NSError *error = nil;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+    return _fetchedResultsController;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
@@ -150,6 +184,16 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+- (NSString *) formatDate:(NSDate*)date withFormat:(NSString *) format {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    NSString * dateString = @"";
+    
+    [formatter setDateFormat:format];
+    dateString = [formatter stringFromDate:date];
+    
+    return dateString;
+}
+
 - (IBAction)addTask:(id)sender {
     TaskViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"TaskViewController"];
     [controller setProject:self.detailItem];
@@ -161,12 +205,13 @@
 
 - (void)configureCell:(UITableViewCell *)cell withTaskObject:(Task *)task {
     cell.textLabel.text = [[task valueForKey:@"title"] description];
-    cell.detailTextLabel.text = [task valueForKey:@"title"];
     
     if ([[task valueForKey:@"checked"] boolValue]) {
         [cell setBackgroundColor: [UIColor greenColor]];
+        cell.detailTextLabel.text = [[NSString alloc]initWithFormat:@"Date de fin : %@", [self formatDate:[task valueForKey:@"date_end"] withFormat:@"dd-MM-yyyy"]];
     } else {
         [cell setBackgroundColor: [UIColor whiteColor]];
+        cell.detailTextLabel.text = [[NSString alloc]initWithFormat:@"Date de début : %@", [self formatDate: [task valueForKey:@"date_start"] withFormat:@"dd-MM-yyyy"]];
     }
 }
 
