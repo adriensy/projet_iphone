@@ -234,6 +234,15 @@
                                     <action selector="showDatePickerStart:" destination="0TL-aw-eQY" eventType="touchUpInside" id="wTp-iJ-f34"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sif-qc-2jX">
+                                <rect key="frame" x="24" y="285" width="440" height="30"/>
+                                <state key="normal" title="Date de fin">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showDatePickerEnd:" destination="0TL-aw-eQY" eventType="touchUpInside" id="zeY-AY-VP2"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6ea-EG-mqs">
                                 <rect key="frame" x="134" y="329" width="315" height="226"/>
                                 <subviews>
@@ -255,15 +264,18 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.4724846955" green="0.68794631699999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sif-qc-2jX">
-                                <rect key="frame" x="24" y="285" width="440" height="30"/>
-                                <state key="normal" title="Date de fin">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="En cours" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgm-3g-nXY">
+                                <rect key="frame" x="16" y="194" width="76" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="sLF-L0-Grc">
+                                <rect key="frame" x="100" y="189" width="51" height="31"/>
                                 <connections>
-                                    <action selector="showDatePickerEnd:" destination="0TL-aw-eQY" eventType="touchUpInside" id="zeY-AY-VP2"/>
+                                    <action selector="changeState:" destination="0TL-aw-eQY" eventType="valueChanged" id="yLK-Ye-aPu"/>
                                 </connections>
-                            </button>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -275,6 +287,8 @@
                         <outlet property="dateStartButton" destination="NIZ-Yg-me7" id="jKr-U1-FF1"/>
                         <outlet property="pickerView" destination="Wbf-hm-51M" id="9OY-ps-uG2"/>
                         <outlet property="pickerViewEnd" destination="6ea-EG-mqs" id="Uah-BM-Od5"/>
+                        <outlet property="state" destination="sLF-L0-Grc" id="9N9-eK-zqh"/>
+                        <outlet property="stateText" destination="fgm-3g-nXY" id="uMe-oq-OKG"/>
                         <outlet property="taskTitle" destination="aKK-8d-0Og" id="mWi-7B-TRD"/>
                         <outlet property="view" destination="LZQ-GT-iU2" id="dCb-vf-oJy"/>
                     </connections>

@@ -13,6 +13,10 @@
 @end
 
 @implementation TaskViewController
+
+static NSString* const EnCoursString = @"En cours";
+static NSString* const TermineeString = @"Terminée";
+
 @synthesize managedObjectContext;
 @synthesize pickerView;
 
@@ -36,14 +40,12 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)setDetailItem:(id)newDetailItem {
     if (_detailItem != newDetailItem) {
         _detailItem = newDetailItem;
         
-        // Update the view.
         [self configureView];
     }
 }
@@ -76,22 +78,39 @@
     if (self.detailItem) {
         self.taskTitle.text = [[self.detailItem valueForKey:@"title"] description];
         self.TaskDescription.text = [[self.detailItem valueForKey:@"describe"] description];
+        
         [[self dateStart] setDate: [self.detailItem valueForKey:@"date_start"]];
         [[self dateEnd] setDate: [self.detailItem valueForKey:@"date_end"]];
+        
+        BOOL iss = [[self.detailItem valueForKey:@"checked"] boolValue];
+        NSLog(iss ? @"YES" : @"NO");
+        
+        
+        [[self state] setOn: [[self.detailItem valueForKey:@"checked"] boolValue] animated:NO];
+        
+        project = [self.detailItem valueForKey:@"project_id"];
         
         NSDate *dateSelectedFin = [self.dateEnd date];
         NSDate *dateSelectedDebut = [self.dateStart date];
         NSString *dateFinStamp = [[NSString alloc]initWithFormat:@"%@", dateSelectedFin];
         NSString *dateDebutStamp = [[NSString alloc]initWithFormat:@"%@", dateSelectedDebut];
-        self.dateEndButton.titleLabel.text = dateFinStamp;
-        self.dateStartButton.titleLabel.text = dateDebutStamp;
-        
-        project = [self.detailItem valueForKey:@"project_id"];
+        [[self dateEndButton] setTitle:dateFinStamp forState:UIControlStateNormal];
+        [[self dateStartButton] setTitle:dateDebutStamp forState:UIControlStateNormal];
     }
+    
+    //[self generateTextFromCurrentState];
 }
 
 - (void) setProject:(Project*)newProject {
     project = newProject;
+}
+
+- (void) generateTextFromCurrentState {
+    if (self.state.isOn) {
+        [[self stateText] setText: TermineeString];
+    } else {
+        [[self stateText] setText: EnCoursString];
+    }
 }
 
 - (IBAction)saveTask:(id)sender {
@@ -115,6 +134,7 @@
     [task setValue: dateEndPicker forKey:@"date_end"];
     [task setValue:[[self taskTitle] text] forKey:@"title"];
     [task setValue:[[self TaskDescription] text] forKey:@"describe"];
+    [task setValue: [NSNumber numberWithBool: self.state.isOn] forKey:@"checked"];
     [task setValue:project forKey:@"project_id"];
     
     NSSet* tasks = [[NSSet alloc] initWithSet:[project tasks]];
@@ -127,16 +147,6 @@
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     }
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)showDatePickerStart:(id)sender {
     [UIView beginAnimations:nil context:NULL];
@@ -180,6 +190,17 @@
     [UIView commitAnimations];
     
     [[self view] setBackgroundColor:[UIColor whiteColor]];
+}
+
+- (IBAction)changeState:(id)sender {
+    NSLOG(@"%@",self.state.isOn);
+    if (self.state.isOn) {
+        [[self state] setOn:NO animated:YES];
+    } else {
+        [[self state] setOn:YES animated:YES];
+    }
+    
+    [self generateTextFromCurrentState];
 }
 
 

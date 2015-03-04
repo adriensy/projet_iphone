@@ -10,13 +10,29 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "projet_iphone/TaskViewController.h"
-            timestampString = "447097636.690431"
+            timestampString = "447102621.166432"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "@interface TaskViewController"
             landmarkType = "2">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "projet_iphone/TaskViewController.m"
+            timestampString = "447103316.437262"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "-saveTask:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
