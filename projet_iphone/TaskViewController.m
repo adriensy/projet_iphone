@@ -82,10 +82,6 @@ static NSString* const TermineeString = @"Terminée";
         [[self dateStart] setDate: [self.detailItem valueForKey:@"date_start"]];
         [[self dateEnd] setDate: [self.detailItem valueForKey:@"date_end"]];
         
-        BOOL iss = [[self.detailItem valueForKey:@"checked"] boolValue];
-        NSLog(iss ? @"YES" : @"NO");
-        
-        
         [[self state] setOn: [[self.detailItem valueForKey:@"checked"] boolValue] animated:NO];
         
         project = [self.detailItem valueForKey:@"project_id"];
@@ -98,14 +94,14 @@ static NSString* const TermineeString = @"Terminée";
         [[self dateStartButton] setTitle:dateDebutStamp forState:UIControlStateNormal];
     }
     
-    //[self generateTextFromCurrentState];
+    [self generateTextFromCurrentState:nil];
 }
 
 - (void) setProject:(Project*)newProject {
     project = newProject;
 }
 
-- (void) generateTextFromCurrentState {
+- (IBAction) generateTextFromCurrentState:(id)sender {
     if (self.state.isOn) {
         [[self stateText] setText: TermineeString];
     } else {
@@ -190,17 +186,6 @@ static NSString* const TermineeString = @"Terminée";
     [UIView commitAnimations];
     
     [[self view] setBackgroundColor:[UIColor whiteColor]];
-}
-
-- (IBAction)changeState:(id)sender {
-    NSLOG(@"%@",self.state.isOn);
-    if (self.state.isOn) {
-        [[self state] setOn:NO animated:YES];
-    } else {
-        [[self state] setOn:YES animated:YES];
-    }
-    
-    [self generateTextFromCurrentState];
 }
 
 

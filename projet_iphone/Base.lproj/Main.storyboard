@@ -273,7 +273,7 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="sLF-L0-Grc">
                                 <rect key="frame" x="100" y="189" width="51" height="31"/>
                                 <connections>
-                                    <action selector="changeState:" destination="0TL-aw-eQY" eventType="valueChanged" id="yLK-Ye-aPu"/>
+                                    <action selector="generateTextFromCurrentState:" destination="0TL-aw-eQY" eventType="valueChanged" id="KvW-Vx-aPM"/>
                                 </connections>
                             </switch>
                         </subviews>

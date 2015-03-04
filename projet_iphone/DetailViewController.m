@@ -21,8 +21,7 @@
 - (void)setDetailItem:(id)newDetailItem {
     if (_detailItem != newDetailItem) {
         _detailItem = newDetailItem;
-            
-        // Update the view.
+        
         [self configureView];
     }
 }
@@ -67,11 +66,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configureView];
-    
-    //self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    
-    //UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    //self.navigationItem.rightBarButtonItem = addButton;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -139,13 +133,13 @@
 }
 
 - (void)configureCell:(UITableViewCell *)cell withTaskObject:(Task *)task {
-    BOOL isChecked = [task valueForKey:@"checked"];
-    
     cell.textLabel.text = [[task valueForKey:@"title"] description];
     cell.detailTextLabel.text = [task valueForKey:@"title"];
     
-    if (isChecked) {
+    if ([[task valueForKey:@"checked"] boolValue]) {
         [cell setBackgroundColor: [UIColor greenColor]];
+    } else {
+        [cell setBackgroundColor: [UIColor whiteColor]];
     }
 }
 
@@ -158,7 +152,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+        Project *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
         [controller setDetailItem:object];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;

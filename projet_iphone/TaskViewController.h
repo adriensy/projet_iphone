@@ -35,7 +35,6 @@
 - (void) setIsNew:(int)newIsNew;
 - (IBAction)showDatePickerStart:(id)sender;
 - (IBAction)hideDatePickerEnd:(id)sender;
-- (IBAction)changeState:(id)sender;
-- (void) generateTextFromCurrentState;
+- (IBAction) generateTextFromCurrentState:(id)sender;
 
 @end
