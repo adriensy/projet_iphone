@@ -53,6 +53,14 @@ static NSString* const TermineeString = @"Terminée";
     [super didReceiveMemoryWarning];
 }
 
+- (void) enablePrincipaleViewControls:(BOOL)enabled {
+    [self.taskTitle setEnabled:enabled];
+    [self.TaskDescription setEditable:enabled];
+    [self.dateStartButton setEnabled:enabled];
+    [self.dateEndButton setEnabled:enabled];
+    [self.state setEnabled:enabled];
+}
+
 - (void)setDetailItem:(id)newDetailItem {
     if (_detailItem != newDetailItem) {
         _detailItem = newDetailItem;
@@ -65,6 +73,15 @@ static NSString* const TermineeString = @"Terminée";
     isNew = newIsNew;
 }
 
+- (NSString *) formatDate:(NSDate*)date withFormat:(NSString *) format {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    NSString * dateString = @"";
+    
+    [formatter setDateFormat:format];
+    dateString = [formatter stringFromDate:date];
+    
+    return dateString;
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -88,26 +105,39 @@ static NSString* const TermineeString = @"Terminée";
     
     self.navigationItem.leftBarButtonItem.title = @"Retour";
     
+    // Bouton valider arrondi
+    CALayer *btnLayer = [[self saveButton] layer];
+    [btnLayer setBorderWidth:0.5f];
+    [btnLayer setBorderColor:[[UIColor blueColor] CGColor]];
+    [btnLayer setMasksToBounds:YES];
+    [btnLayer setCornerRadius:5.0f];
+    [[self saveButton] setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+    
     if (self.detailItem) {
+        // Init title and text dates
         self.navigationItem.title = @"Modifier ma tâche";
+        NSString* dateStartStr = [self formatDate: [self.detailItem valueForKey:@"date_start"] withFormat:@"dd-MM-yyyy"];
+        NSString* dateEndStr = [self formatDate: [self.detailItem valueForKey:@"date_end"] withFormat:@"dd-MM-yyyy"];
         
+        // Init value title and describes
         self.taskTitle.text = [[self.detailItem valueForKey:@"title"] description];
         self.TaskDescription.text = [[self.detailItem valueForKey:@"describe"] description];
         
+        // Datepicker
         [[self dateStart] setDate: [self.detailItem valueForKey:@"date_start"]];
         [[self dateEnd] setDate: [self.detailItem valueForKey:@"date_end"]];
         
+        // Text date button
+        [[self dateStartButton] setTitle:dateStartStr forState:UIControlStateNormal];
+        [[self dateEndButton] setTitle:dateEndStr forState:UIControlStateNormal];
+        
+        // State of task
         [[self state] setOn: [[self.detailItem valueForKey:@"checked"] boolValue] animated:NO];
         
+        // Set project ID
         project = [self.detailItem valueForKey:@"project_id"];
-        
-        NSDate *dateSelectedFin = [self.dateEnd date];
-        NSDate *dateSelectedDebut = [self.dateStart date];
-        NSString *dateFinStamp = [[NSString alloc]initWithFormat:@"%@", dateSelectedFin];
-        NSString *dateDebutStamp = [[NSString alloc]initWithFormat:@"%@", dateSelectedDebut];
-        [[self dateEndButton] setTitle:dateFinStamp forState:UIControlStateNormal];
-        [[self dateStartButton] setTitle:dateDebutStamp forState:UIControlStateNormal];
     } else {
+        // New task
         self.navigationItem.title = @"Créer ma tâche";
     }
     
@@ -168,6 +198,7 @@ static NSString* const TermineeString = @"Terminée";
 }
 
 - (IBAction)showDatePickerStart:(id)sender {
+    [self enablePrincipaleViewControls:NO];
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
     [[self pickerView] setHidden:NO];
@@ -177,9 +208,10 @@ static NSString* const TermineeString = @"Terminée";
 }
 
 - (IBAction)hideDatePickerStart:(id)sender {
-    NSDate *dateSelectedDebut = [self.dateStart date];
-    NSString *dateDebutStamp = [[NSString alloc]initWithFormat:@"%@", dateSelectedDebut];
-    self.dateStartButton.titleLabel.text = dateDebutStamp;
+    [self enablePrincipaleViewControls:YES];
+    NSString* dateStartStr = [self formatDate: [self.dateStart date] withFormat:@"dd-MM-yyyy"];
+    
+    [[self dateStartButton] setTitle:dateStartStr forState:UIControlStateNormal];
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
@@ -190,6 +222,7 @@ static NSString* const TermineeString = @"Terminée";
 }
 
 - (IBAction)showDatePickerEnd:(id)sender {
+    [self enablePrincipaleViewControls:NO];
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
     [[self pickerViewEnd] setHidden:NO];
@@ -199,9 +232,10 @@ static NSString* const TermineeString = @"Terminée";
 }
 
 - (IBAction)hideDatePickerEnd:(id)sender {
-    NSDate *dateSelectedFin = [self.dateEnd date];
-    NSString *dateFinStamp = [[NSString alloc]initWithFormat:@"%@", dateSelectedFin];
-    self.dateEndButton.titleLabel.text = dateFinStamp;
+    [self enablePrincipaleViewControls:YES];
+    NSString* dateEndStr = [self formatDate: [self.dateEnd date] withFormat:@"dd-MM-yyyy"];
+    
+    [[self dateEndButton] setTitle:dateEndStr forState:UIControlStateNormal];
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];

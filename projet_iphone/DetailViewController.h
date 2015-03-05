@@ -14,7 +14,6 @@
 #import "Task.h"
 
 @interface DetailViewController : UIViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, UITextViewDelegate> {
-    NSArray * tasks;
     BOOL isNew;
 }
 

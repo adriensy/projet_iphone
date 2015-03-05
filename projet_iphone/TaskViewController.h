@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *dateEndButton;
 @property (weak, nonatomic) IBOutlet UISwitch *state;
 @property (weak, nonatomic) IBOutlet UILabel *stateText;
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
 
 
 @property (weak, nonatomic) IBOutlet UIDatePicker *dateStart;

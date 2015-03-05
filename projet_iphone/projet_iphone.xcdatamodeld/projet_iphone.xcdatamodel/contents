@@ -4,7 +4,7 @@
         <attribute name="describe" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="project_id" inverseEntity="Task" syncable="YES"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Task" inverseName="project_id" inverseEntity="Task" syncable="YES"/>
     </entity>
     <entity name="Task" representedClassName="Task" syncable="YES">
         <attribute name="checked" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -13,10 +13,10 @@
         <attribute name="describe" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="project_id" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Project" inverseName="tasks" inverseEntity="Project" syncable="YES"/>
+        <relationship name="project_id" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="Project" inverseName="tasks" inverseEntity="Project" syncable="YES"/>
     </entity>
     <elements>
         <element name="Project" positionX="-45" positionY="0" width="128" height="103"/>
-        <element name="Task" positionX="169" positionY="9" width="128" height="148"/>
+        <element name="Task" positionX="700" positionY="95" width="128" height="148"/>
     </elements>
 </model>
