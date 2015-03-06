@@ -103,7 +103,7 @@
         [[self tableView] setHidden:NO];
         [[self titleTasksList] setHidden:NO];
     } else {
-        self.navigationItem.title = @"Créer mon prjet";
+        self.navigationItem.title = @"Créer mon projet";
     }
 }
 
